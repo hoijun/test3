@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>짜장면 vs 짬뽕 투표</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      background-color: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      padding: 40px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+
+    form {
+      margin-top: 30px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .option {
+      position: relative;
+    }
+
+    .option input[type="radio"] {
+      display: none;
+    }
+
+    .option label {
+      display: block;
+      padding: 20px;
+      border: 3px solid #e0e0e0;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 18px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    .option label:hover {
+      border-color: #667eea;
+      background-color: #f8f9ff;
+      transform: translateY(-2px);
+    }
+
+    .option input[type="radio"]:checked + label {
+      border-color: #667eea;
+      background-color: #667eea;
+      color: white;
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .emoji {
+      font-size: 32px;
+      display: inline-block;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .result-link {
+      margin-top: 20px;
+      display: inline-block;
+      color: #667eea;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .result-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>짜장면이 좋아? 짬뽕이 좋아?</h1>
+    <p class="subtitle">당신의 선택은?</p>
+
+    <form method="POST" action="/vote" id="voteForm">
+      <div class="options">
+        <div class="option">
+          <input type="radio" id="jjajangmyeon" name="choice" value="jjajangmyeon" required>
+          <label for="jjajangmyeon">
+            <span class="emoji">🍜</span>
+            짜장면
+          </label>
+        </div>
+
+        <div class="option">
+          <input type="radio" id="jjamppong" name="choice" value="jjamppong" required>
+          <label for="jjamppong">
+            <span class="emoji">🍲</span>
+            짬뽕
+          </label>
+        </div>
+      </div>
+
+      <button type="submit">투표하기</button>
+    </form>
+
+    <a href="/result" class="result-link">현재 결과 보기</a>
+  </div>
+
+  <script>
+    // 폼 제출 시 버튼 비활성화 (중복 제출 방지)
+    document.getElementById('voteForm').addEventListener('submit', function() {
+      const button = this.querySelector('button');
+      button.disabled = true;
+      button.textContent = '투표 중...';
+    });
+  </script>
+</body>
+</html>

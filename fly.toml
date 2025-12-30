@@ -1,0 +1,23 @@
+# fly.toml app configuration file
+# 앱 이름은 배포 시 자동으로 생성됩니다
+
+app = "jjajang-jjamppong-vote"
+primary_region = "nrt"  # 도쿄 리전 (한국과 가장 가까움)
+
+[build]
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 1
+
+[[vm]]
+  memory = '256mb'
+  cpu_kind = 'shared'
+  cpus = 1
+
+[mounts]
+  source = "vote_data"
+  destination = "/app/data"
